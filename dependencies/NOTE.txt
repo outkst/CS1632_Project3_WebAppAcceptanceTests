@@ -1,0 +1,10 @@
+In order to compile the RedditTest.java
+Bill gave us as a sample, I had to add
+everything in the zip.  This incldued
+everything in the lib/ directory.
+
+The program was also giving a deprecated
+API warning.  Likely, the API was updated
+between now and when Bill Wrote it.
+
+C.
