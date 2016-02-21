@@ -1,0 +1,25 @@
+https://wiki.archlinux.org/
+	Checking search functionality
+	Edit a page (?)
+	Page login (?)
+	Account creation (?)
+		Actually hard due to pacman dependent CAPTCHA.
+		"What is the result of 'pacman -V|base32|head -l"
+	
+	Possibly problems: Too simple?
+					   No Dynamicity.
+
+http://www.theguardian.com/us (or probably any news site)
+	Has some dynamic nature and menus that can be clicked
+	that also create other menus.
+
+https://www.haskell.org/
+	Has a web based haskell interpreter!
+	Might be cool
+
+http://smittenkitchen.com/
+	Lots of pictures
+	Surprise me! button is non-deterministic (?)
+	Links to social media
+
+
