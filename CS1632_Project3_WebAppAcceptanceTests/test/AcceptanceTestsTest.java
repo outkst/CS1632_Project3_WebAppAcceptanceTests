@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 
+import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  *
@@ -41,11 +44,12 @@ public class AcceptanceTestsTest {
      */
     @Test
     public void testMain() {
-        System.out.println("main");
+        System.out.println("main Testing...");
         String[] args = null;
         AcceptanceTests.main(args);
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("The test case is a prototype and not complete.");
     }
     
 }
