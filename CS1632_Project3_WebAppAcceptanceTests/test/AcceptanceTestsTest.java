@@ -217,6 +217,43 @@ public class AcceptanceTestsTest {
         // test complete
         System.out.println("\tmenuBarCorrectness: Success!");
     }
+    
+    /**
+     * Make sure the username input, password input, "remember me" checkbox, 
+     *      and submit button exists for proper creation of account.
+     */
+    @Test
+    public void verifyLoginForm() {
+        // announce test and build expectations
+        System.out.println("verifyLoginForm: Testing that the username/password/'remember me'/submit controls exist...");
+        String username = "wpName1";
+        String password = "wpPassword1";
+        String rememberMe = "wpRemember";
+        String login = "wpRemember";
+
+        // go to the main arch wiki page
+        driver.get("https://wiki.archlinux.org/index.php/Special:UserLogin");
+
+        boolean elemExists;
+        // see if the username control exists
+        elemExists = !driver.findElements(By.id(username)).isEmpty();
+        assertTrue(String.format("Cannot find the username control '%s'.", username), elemExists);
+        
+        // see if the password control exists
+        elemExists = !driver.findElements(By.id(password)).isEmpty();
+        assertTrue(String.format("Cannot find the password control '%s'.", password), elemExists);
+        
+        // see if the "Remember Me" control exists
+        elemExists = !driver.findElements(By.id(rememberMe)).isEmpty();
+        assertTrue(String.format("Cannot find the 'remember me' control '%s'.", rememberMe), elemExists);
+        
+        // see if the Login button control exists
+        elemExists = !driver.findElements(By.id(login)).isEmpty();
+        assertTrue(String.format("Cannot find the login button control '%s'.", login), elemExists);
+        
+        // test complete
+        System.out.println("\tverifyLoginForm: Success!");
+    }
 
     /**
      * This main method runs our test suite
