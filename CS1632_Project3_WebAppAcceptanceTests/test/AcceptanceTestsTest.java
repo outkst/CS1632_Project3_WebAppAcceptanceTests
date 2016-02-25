@@ -159,4 +159,29 @@ public class AcceptanceTestsTest {
             }
         }
     }
+
+	/**
+  	 * Make sure that Menu bar is available on the main page 
+	 */
+	@Test
+	public void menuBarExistence() {
+		// announce test and build expectations
+		System.out.printf("menuBarExistence: Testing that the login button exists on the main page...\n");
+		String menuBarName = "menu-bar";
+		
+		// go to the main arch wiki page
+		driver.get("https://wiki/archlinux.org/");
+
+		// first make sure the div exists for the account controls
+		System.out.printf("\tTesting the div container existence that holds the menu options..");
+	}	
+		
+	
+
+
+	// This main method runs our test suite
+	public static void main(String[] args) {
+		org.junit.runner.JUnitCore.main("AcceptanceTestsTest");
+	}
+
 }
