@@ -1,3 +1,4 @@
+
 import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -20,7 +21,7 @@ import java.util.List;
 public class AcceptanceTestsTest {
 
     private static FirefoxDriver driver;
-    WebElement element;
+    private static WebElement element;
     private static final int implicitWaitTime = 2; //seconds
 
     /**
@@ -168,59 +169,69 @@ public class AcceptanceTestsTest {
         }
     }
 
-	/**
-  	 * Make sure that Menu bar is available on the main page 
-	 */
-	@Test
-	public void menuBarExistence() {
-		// announce test and build expectations
-		System.out.printf("menuBarExistence: Testing that the menu bar exists on the main page...\n");
-		String menuBarName = "archnavbarlist";
-		
-		// go to the main arch wiki page
-		driver.get("https://wiki.archlinux.org/");
-		
-		// try to grab the ul with nav bar
-		boolean menuBarExists = !driver.findElements(By.id(menuBarName)).isEmpty();
-		assertTrue(String.format("The menu bar '%s' cannot be found.", menuBarName), menuBarExists);
-	}	
+    /**
+     * Make sure that Menu bar is available on the main page
+     */
+    @Test
+    public void menuBarExistence() {
+        // announce test and build expectations
+        System.out.printf("menuBarExistence: Testing that the menu bar exists on the main page...\n");
+        String menuBarName = "archnavbarlist";
 
-	/**
-	 * Make sure that the Menu bar on the main page has "Home" "Packages" "Forums" "Wiki" "Bugs" "AUR" "Download"
-	 */
-	@Test
-	public void menuBarCorrectness() {
-		// announce test and build expectations
-		System.out.printf("menuBarCorrectness: Testing that the login button exists on the main page...\n");
-		String menuBarName = "archnavbarmenu";	
-		String menuBarXPath = String.format("//div[@id='%s']/ul/li", menuBarName);
+        // go to the main arch wiki page
+        driver.get("https://wiki.archlinux.org/");
 
-		// go to the main arch wiki page
-		driver.get("https://wiki.archlinux.org/");
+        // try to grab the ul with nav bar
+        boolean menuBarExists = !driver.findElements(By.id(menuBarName)).isEmpty();
+        assertTrue(String.format("The menu bar '%s' cannot be found.", menuBarName), menuBarExists);
+    }
 
-		// grab ul of nav bar
-		try {
-			//Grab unordered list and put it in a list object
-			List<WebElement> allElements = driver.findElements(By.xpath(menuBarXPath));	
-			//Check that the nav bar has 7 elements	
-			assertEquals(allElements.size(), 7);
+    /**
+     * Make sure that the Menu bar on the main page has the items
+     *      "Home" "Packages" "Forums" "Wiki" "Bugs" "AUR" "Download"
+     */
+    @Test
+    public void menuBarCorrectness() {
+        // announce test and build expectations
+        System.out.printf("menuBarCorrectness: Testing that the menu bar exists and has the 7 correct elements...\n");
+        String menuBarName = "archnavbarmenu";
+        String menuBarXPath = String.format("//div[@id='%s']/ul/li", menuBarName);
 
-			//Check that each of the 7 elements has the correct text
-			assertEquals(allElements.get(0).getText(), "Home");	
-			assertEquals(allElements.get(1).getText(), "Packages");	
-			assertEquals(allElements.get(2).getText(), "Forums");	
-			assertEquals(allElements.get(3).getText(), "Wiki");	
-			assertEquals(allElements.get(4).getText(), "Bugs");	
-			assertEquals(allElements.get(5).getText(), "AUR");	
-			assertEquals(allElements.get(6).getText(), "Download");	
-		} catch (NoSuchElementException ex) {
-			fail();
-		}	
-	}	
-		
-	// This main method runs our test suite
-	public static void main(String[] args) {
-		org.junit.runner.JUnitCore.main("AcceptanceTestsTest");
-	}
+        // go to the main arch wiki page
+        driver.get("https://wiki.archlinux.org/");
+
+        // grab unordered list of nav bar items
+        try {
+            // grab unordered list and put it in a list object
+            List<WebElement> allElements = driver.findElements(By.xpath(menuBarXPath));
+            
+            // check that the nav bar has 7 elements	
+            assertEquals(allElements.size(), 7);
+
+            // check that each of the 7 elements has the correct text
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "Home"), allElements.get(0).getText(), "Home");
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "Packages"), allElements.get(1).getText(), "Packages");
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "Forums"), allElements.get(2).getText(), "Forums");
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "Wiki"), allElements.get(3).getText(), "Wiki");
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "Bugs"), allElements.get(4).getText(), "Bugs");
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "AUR"), allElements.get(5).getText(), "AUR");
+            assertEquals(String.format("The menu bar item '%s' cannot be found.", "Download"), allElements.get(6).getText(), "Download");
+            
+        } catch (NoSuchElementException ex) {
+            fail(String.format("The menu bar titled '%s' could not be located.", menuBarName));
+        }
+        
+        // test complete
+        System.out.println("\tmenuBarCorrectness: Success!");
+    }
+
+    /**
+     * This main method runs our test suite
+     * 
+     * @param args **not used**
+     */
+    public static void main(String[] args) {
+        org.junit.runner.JUnitCore.main("AcceptanceTestsTest");
+    }
 
 }
