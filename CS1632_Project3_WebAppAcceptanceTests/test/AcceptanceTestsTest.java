@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import java.util.List;
 
 /**
  * @author Joe Meszar (jwm54@pitt.edu) | Cyrus Ramavarapu (crr41@pitt.edu)
@@ -166,18 +167,50 @@ public class AcceptanceTestsTest {
 	@Test
 	public void menuBarExistence() {
 		// announce test and build expectations
-		System.out.printf("menuBarExistence: Testing that the login button exists on the main page...\n");
+		System.out.printf("menuBarExistence: Testing that the menu bar exists on the main page...\n");
 		String menuBarName = "archnavbarlist";
 		
 		// go to the main arch wiki page
 		driver.get("https://wiki.archlinux.org/");
 		
-		// try to grab the div with nav bar
+		// try to grab the ul with nav bar
 		boolean menuBarExists = !driver.findElements(By.id(menuBarName)).isEmpty();
 		assertTrue(String.format("The menu bar '%s' cannot be found.", menuBarName), menuBarExists);
-	
 	}	
 
+	/**
+	 * Make sure that the Menu bar on the main page has "Home" "Packages" "Forums" "Wiki" "Bugs" "AUR" "Download"
+	 */
+	@Test
+	public void menuBarCorrectness() {
+		// announce test and build expectations
+		System.out.printf("menuBarCorrectness: Testing that the login button exists on the main page...\n");
+		String menuBarName = "archnavbarmenu";	
+		String menuBarXPath = String.format("//div[@id='%s']/ul/li", menuBarName);
+
+		// go to the main arch wiki page
+		driver.get("https://wiki.archlinux.org/");
+
+		// grab ul of nav bar
+		try {
+			//Grab unordered list and put it in a list object
+			List<WebElement> allElements = driver.findElements(By.xpath(menuBarXPath));	
+			//Check that the nav bar has 7 elements	
+			assertEquals(allElements.size(), 7);
+
+			//Check that each of the 7 elements has the correct text
+			assertEquals(allElements.get(0).getText(), "Home");	
+			assertEquals(allElements.get(1).getText(), "Packages");	
+			assertEquals(allElements.get(2).getText(), "Forums");	
+			assertEquals(allElements.get(3).getText(), "Wiki");	
+			assertEquals(allElements.get(4).getText(), "Bugs");	
+			assertEquals(allElements.get(5).getText(), "AUR");	
+			assertEquals(allElements.get(6).getText(), "Download");	
+		} catch (NoSuchElementException ex) {
+			fail();
+		}	
+	}	
+		
 	// This main method runs our test suite
 	public static void main(String[] args) {
 		org.junit.runner.JUnitCore.main("AcceptanceTestsTest");
