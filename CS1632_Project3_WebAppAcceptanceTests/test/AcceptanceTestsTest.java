@@ -11,6 +11,13 @@ import java.util.List;
 /**
  * @author Joe Meszar (jwm54@pitt.edu) | Cyrus Ramavarapu (crr41@pitt.edu)
  */
+
+/**
+ * Arch Login: Cs1632archtest 
+ * Password: archtest
+ */ 
+
+
 public class AcceptanceTestsTest {
 
     private static FirefoxDriver driver;
