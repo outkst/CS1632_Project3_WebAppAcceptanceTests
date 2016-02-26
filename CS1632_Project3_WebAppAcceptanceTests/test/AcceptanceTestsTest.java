@@ -44,9 +44,11 @@ public class AcceptanceTestsTest {
         driver.quit();
     }
 
-
-
-
+	/**
+	 * AS A USER.
+	 * I WOULD LIKE TO GO TO ARCH WIKI.
+	 * IN ORDER TO FIND AN INSTALLATION GUIDE.
+	 */
 
     /**
      * Make sure the home page is reachable and correct.
@@ -106,6 +108,46 @@ public class AcceptanceTestsTest {
         // test complete
         System.out.println("\tsearchForInstallationGuide: Success!");
     }
+
+    /**
+     * Tests to make sure the search results container is shown when a
+     *      fuzzy search is performed.
+     */
+    @Test
+    public void searchResultsContainerExists() {
+        // announce test and build expectations
+        System.out.println("searchResultsContainerExists: Testing the search results container is shown...");
+        String searchKeyword = "caveats";
+        String searchContainer = "mw-search-results";
+
+        // go to the main arch wiki page
+        driver.get("https://wiki.archlinux.org/");
+
+        // get the search box of the arch wiki page
+        element = driver.findElement(By.id("searchInput"));
+
+        // enter the search keyword into the search box
+        element.sendKeys(searchKeyword);
+
+        // submit using the page's default submit button
+        element.submit();
+        
+        boolean elemExists;
+        // see if the search container exists
+        elemExists = !driver.findElements(By.className(searchContainer)).isEmpty();
+        assertTrue(String.format("Cannot find the search container '%s'.", searchContainer), elemExists);
+        
+        // test complete
+        System.out.println("\tsearchResultsContainerExists: Success!");
+    }
+
+
+	/**
+	 * USER STORY:  
+	 * 		AS A MEMBER.
+	 * 		I WOULD LIKE TO LOGIN TO ARCHWIKI.
+	 * 		IN ORDER TO EDIT A PAGE.
+	 */
 
     /**
      * Make sure the div container exists for the account controls.
@@ -171,6 +213,13 @@ public class AcceptanceTestsTest {
             }
         }
     }
+
+	/**
+	 * USER STORY
+	 *		AS A USER.
+	 *		I WOULD LIKE TO GO TO THE AUR FROM ARCHWIKI IN A NEW TAB
+	 *		IN ORDER TO DOWNLOAD googletalk-plugin.
+	 */
 
     /**
      * Make sure that Menu bar is available on the main page
@@ -265,37 +314,6 @@ public class AcceptanceTestsTest {
         System.out.println("\tverifyLoginForm: Success!");
     }
     
-    /**
-     * Tests to make sure the search results container is shown when a
-     *      fuzzy search is performed.
-     */
-    @Test
-    public void searchResultsContainerExists() {
-        // announce test and build expectations
-        System.out.println("searchResultsContainerExists: Testing the search results container is shown...");
-        String searchKeyword = "caveats";
-        String searchContainer = "mw-search-results";
-
-        // go to the main arch wiki page
-        driver.get("https://wiki.archlinux.org/");
-
-        // get the search box of the arch wiki page
-        element = driver.findElement(By.id("searchInput"));
-
-        // enter the search keyword into the search box
-        element.sendKeys(searchKeyword);
-
-        // submit using the page's default submit button
-        element.submit();
-        
-        boolean elemExists;
-        // see if the search container exists
-        elemExists = !driver.findElements(By.className(searchContainer)).isEmpty();
-        assertTrue(String.format("Cannot find the search container '%s'.", searchContainer), elemExists);
-        
-        // test complete
-        System.out.println("\tsearchResultsContainerExists: Success!");
-    }
 
 	/**
 	 * USER STORY:
