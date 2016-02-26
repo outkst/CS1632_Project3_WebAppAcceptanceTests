@@ -294,7 +294,48 @@ public class AcceptanceTestsTest {
         System.out.println("\tsearchResultsContainerExists: Success!");
     }
 
-    /**
+	/**
+	 * Make sure that the ArchLinux logo exists on the main page
+	 */
+	@Test
+	public void archLogoExistence() {
+        // announce test and build expectations
+        System.out.printf("archLogoExistence: Testing that the logo exists on the main page...\n");
+		String logoID = "logo";
+		
+		// go to the main wiki page
+		driver.get("https://wiki.archlinux.org/");
+
+		// check if the logo exists
+		boolean logoExists = !driver.findElements(By.id(logoID)).isEmpty();	
+		
+		assertTrue(String.format("Cannot find the Arch Linux Logo at id '%s'.", logoID), logoExists);
+	}
+
+	/**
+	 * Make sure that the ArchLinux logo when clicked takes to user to ArchLinux.org
+	 */
+	@Test
+	public void archLogoCorrectness() {
+        // announce test and build expectations
+        System.out.printf("archLogoExistence: Testing that the logo exists on the main page...\n");
+		String logoID = "logo";
+		String expected_url = "https://www.archlinux.org/";	
+
+		// go to the main wiki page
+		driver.get("https://wiki.archlinux.org/");
+
+		// check if the logo exists
+		try {	
+			driver.findElement(By.id(logoID)).click();
+			String current_url = driver.getCurrentUrl();
+			assertTrue(String.format("Arch logo did not navigate user to : '%s'", expected_url), expected_url.equals(current_url)); 	
+		} catch (NoSuchElementException ex) {
+			fail(String.format("The Arch Linux Logo was not found at '%s'", logoID));
+		}
+	}	
+    
+	/**
      * This main method runs our test suite
      * 
      * @param args **not used**
