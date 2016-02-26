@@ -1,4 +1,3 @@
-
 import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -44,6 +43,10 @@ public class AcceptanceTestsTest {
     public static void tearDownClass() {
         driver.quit();
     }
+
+
+
+
 
     /**
      * Make sure the home page is reachable and correct.
@@ -295,6 +298,13 @@ public class AcceptanceTestsTest {
     }
 
 	/**
+	 * USER STORY:
+	 *		AS A USER.
+	 *		I WOULD LIKE TO GO FROM ARCH WIKI TO MAIN ARCH PAGE IN A NEW TAB
+	 *		IN ORDER TO DOWNLOAD ARCHLINUX
+	 */
+
+	/**
 	 * Make sure that the ArchLinux logo exists on the main page
 	 */
 	@Test
@@ -333,8 +343,33 @@ public class AcceptanceTestsTest {
 		} catch (NoSuchElementException ex) {
 			fail(String.format("The Arch Linux Logo was not found at '%s'", logoID));
 		}
-	}	
-    
+	}
+
+	/**
+	 * USER STORY:
+	 * 		AS A USER.  
+	 *		I WOULD LIKE TO SEE A PAGE'S HISTORY.
+	 *		IN ORDER TO CHECK MOST RECENT REVISION.
+	 */
+
+	/**
+  	 * Make sure that clicking the history tab takes user to revision history for the page
+	 */	 
+	@Test
+	public void checkHistoryExistence() {
+		// announce test and build expectations
+        System.out.printf("historyTabExistence: Testing that the history tab  exists on the MTP page...\n");
+		String link_name = "history";
+		String page_url = "https://wiki.archlinux.org/index.php/MTP";
+
+		// go to the mtp page on the arch wiki
+		driver.get(page_url);
+		
+		boolean history_existence =!driver.findElements(By.linkText(link_name)).isEmpty();
+		
+		assertTrue(String.format("The '%s' tab was not found on '%s'", link_name, page_url), history_existence);
+	}
+	
 	/**
      * This main method runs our test suite
      * 
