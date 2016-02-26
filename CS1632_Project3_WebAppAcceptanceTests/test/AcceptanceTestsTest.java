@@ -83,13 +83,13 @@ public class AcceptanceTestsTest {
         driver.get("https://wiki.archlinux.org/");
 
         // get the search box of the arch wiki page
-        WebElement searchBox = driver.findElement(By.id("searchInput"));
+        element = driver.findElement(By.id("searchInput"));
 
         // enter "Installation Guide" into the search box
-        searchBox.sendKeys("Installation Guide");
+        element.sendKeys("Installation Guide");
 
         // submit using the page's default submit button
-        searchBox.submit();
+        element.submit();
 
         // grab the header telling exactly what page is being shown
         element = driver.findElement(By.id("firstHeading"));
@@ -261,6 +261,38 @@ public class AcceptanceTestsTest {
         // test complete
         System.out.println("\tverifyLoginForm: Success!");
     }
+    
+    /**
+     * Tests to make sure the search results container is shown when a
+     *      fuzzy search is performed.
+     */
+    @Test
+    public void searchResultsContainerExists() {
+        // announce test and build expectations
+        System.out.println("searchResultsContainerExists: Testing the search results container is shown...");
+        String searchKeyword = "caveats";
+        String searchContainer = "mw-search-results";
+
+        // go to the main arch wiki page
+        driver.get("https://wiki.archlinux.org/");
+
+        // get the search box of the arch wiki page
+        element = driver.findElement(By.id("searchInput"));
+
+        // enter the search keyword into the search box
+        element.sendKeys(searchKeyword);
+
+        // submit using the page's default submit button
+        element.submit();
+        
+        boolean elemExists;
+        // see if the search container exists
+        elemExists = !driver.findElements(By.id(searchContainer)).isEmpty();
+        assertTrue(String.format("Cannot find the search container '%s'.", searchContainer), elemExists);
+        
+        // test complete
+        System.out.println("\tsearchResultsContainerExists: Success!");
+    }
 
     /**
      * This main method runs our test suite
@@ -270,5 +302,4 @@ public class AcceptanceTestsTest {
     public static void main(String[] args) {
         org.junit.runner.JUnitCore.main("AcceptanceTestsTest");
     }
-
 }
