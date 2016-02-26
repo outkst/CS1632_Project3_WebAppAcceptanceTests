@@ -287,7 +287,7 @@ public class AcceptanceTestsTest {
         
         boolean elemExists;
         // see if the search container exists
-        elemExists = !driver.findElements(By.id(searchContainer)).isEmpty();
+        elemExists = !driver.findElements(By.className(searchContainer)).isEmpty();
         assertTrue(String.format("Cannot find the search container '%s'.", searchContainer), elemExists);
         
         // test complete
