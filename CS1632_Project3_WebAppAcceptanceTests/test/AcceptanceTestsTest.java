@@ -225,6 +225,25 @@ public class AcceptanceTestsTest {
         System.out.println("\tmenuBarCorrectness: Success!");
     }
 
+	/**
+	 * Make sure that the ArchLinux logo exists on the main page
+	 */
+	@Test
+	public void archLogoExistence() {
+        // announce test and build expectations
+        System.out.printf("archLogoExistence: Testing that the logo exists on the main page...\n");
+       	String divName = "archnavbarlogo"; 
+		String logoName = "logo";
+        String logoXPath = String.format("//div[@id='%s']/%s", divName, logoName);
+
+		// go to the main wiki page
+		driver.get("https://wiki.archlinux.org/");
+
+		// check if the logo exists
+        boolean menuBarExists = !driver.findElements(By.id(menuBarName)).isEmpty();
+	}
+
+
     /**
      * This main method runs our test suite
      * 
