@@ -459,8 +459,21 @@ public class AcceptanceTestsTest {
 			create_account_link.click();
 			String received_title = driver.getTitle();
 			assertTrue(received_title.equals(expected_title));
-		
-			// check forms in order 
+			
+			// check all forms on create account page
+			checkUserInputForms(driver);	
+
+
+		} catch (NoSuchElementException ex) {
+			fail();
+		} catch (WebDriverException wdEx) {
+			fail(String.format("Element is not clickable\n"));
+		}
+	}
+	
+	public void checkUserInputForms(FirefoxDriver driver) {
+
+			// check forms with consideration for ordering 
 			WebElement user_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpName2"));		
 			String un_phtext = user_name_form.getAttribute("placeholder");
 			assertTrue(String.format("Form does not exist"), un_phtext.equals("Enter your username"));			
@@ -491,15 +504,18 @@ public class AcceptanceTestsTest {
 			assertTrue(String.format("Form does not exist"), qst_name.equals("FunnyAnswer"));			
 			System.out.printf("Form with '%s' exists.  Continuing...\n", qst_name);	
 
-
-
-		} catch (NoSuchElementException ex) {
-			fail();
-		} catch (WebDriverException wdEx) {
-			fail(String.format("Element is not clickable\n"));
-		}
 	}
-				
+
+
+	/**
+	 * GIVEN that I am on create account page for arch wiki 
+	 * WHEN I enter username, password, password_retype, email, and answer
+	 * AND password != password_retype
+	 * AND I click Create account button
+	 * Then I should be on create account page with Account creation error text on page 
+	 **/
+
+
 
 
 
