@@ -462,8 +462,6 @@ public class AcceptanceTestsTest {
 			
 			// check all forms on create account page
 			checkUserInputForms(driver);	
-
-
 		} catch (NoSuchElementException ex) {
 			fail();
 		} catch (WebDriverException wdEx) {
@@ -474,6 +472,7 @@ public class AcceptanceTestsTest {
 	public void checkUserInputForms(FirefoxDriver driver) {
 
 			// check forms with consideration for ordering 
+		try {	
 			WebElement user_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpName2"));		
 			String un_phtext = user_name_form.getAttribute("placeholder");
 			assertTrue(String.format("Form does not exist"), un_phtext.equals("Enter your username"));			
@@ -503,7 +502,15 @@ public class AcceptanceTestsTest {
 			String qst_name = question_form.getAttribute("name");
 			assertTrue(String.format("Form does not exist"), qst_name.equals("FunnyAnswer"));			
 			System.out.printf("Form with '%s' exists.  Continuing...\n", qst_name);	
-
+		
+			WebElement submit_button = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpCreateaccount"));		
+			String submit_name = submit_button.getAttribute("name");
+			assertTrue(String.format("Form does not exist"), submit_name.equals("wpCreateaccount"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", submit_name);	
+	
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	}
 
 
@@ -514,12 +521,61 @@ public class AcceptanceTestsTest {
 	 * AND I click Create account button
 	 * Then I should be on create account page with Account creation error text on page 
 	 **/
+	@Test
+	public void testFailedPasswordRetype() {
+		// announce test and build expections
+		System.out.printf("testFailedPasswordRetype: Testing that the that incorrect password retype on account creation is rejected\n");
+
+		String page_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&type=signup";
+	
+		String expected_text = "Account creation error";
+
+		String user_name = "LordFuzzyPaws";
+		String password_1 = "T0t3sSequre";
+		String password_2 = "yellow";
+		String email_entry = "cs1632deliverable3@gmail.com";
+		String real_name = "Nope";
+		/* THIS WORKS AS OF pacman v5.0.1 - libalpm V10.0.1 */	
+		String fun_answer = "BIQC4LJNFYQCAIBAEAQCAIBAEAQCAIBAEAQCAICQMFRW2YLOEB3DKLRQFYYSALJANRUWEYLMOBWS";
 
 
+		// go to create account page of arch wiki
+		driver.get(page_url);
 
+		try {
+			checkUserInputForms(driver);
 
+			WebElement user_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpName2"));		
+			user_name_form.sendKeys(user_name);	
+			
+			WebElement password_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpPassword2"));		
+			password_form.sendKeys(password_1);
+			
+			WebElement retype_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpRetype"));		
+			password_form.sendKeys(password_2);	
 
+			WebElement email_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpEmail"));		
+			email_form.sendKeys(email_entry);
 
+			WebElement real_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpRealName"));		
+			real_name_form.sendKeys(real_name);
+
+			WebElement question_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#FunnyAnswer"));		
+			question_form.sendKeys(fun_answer);	
+
+			// click submit button now that all fields are full
+			WebElement submit_button = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpCreateaccount"));		
+			submit_button.click();
+			
+			String bodyText = driver.findElement(By.tagName("body")).getText();
+			assertTrue("Text not found!", bodyText.contains(expected_text));	
+
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
+	}	
+			
+			
 	/**
      * This main method runs our test suite
      * 
