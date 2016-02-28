@@ -425,7 +425,19 @@ public class AcceptanceTestsTest {
 			fail(String.format("Element is not clickable\n"));
 		}
 	}
-	
+
+	/* I will write this since I can generate the pacman string and also make another dummy gmail account*/
+
+	/**
+	 * USER STORY:
+	 * 		AS A USER.  
+	 *		I WOULD LIKE TO REGISTER ON ARCHWIKI. 
+	 *		IN ORDER TO BECOME A MEMBER. 
+	 */
+
+
+
+
 	/**
      * This main method runs our test suite
      * 
