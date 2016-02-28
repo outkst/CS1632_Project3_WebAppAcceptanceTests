@@ -16,7 +16,6 @@ import java.util.List;
  * Password: archtest
  */ 
 
-
 public class AcceptanceTestsTest {
 
     private static FirefoxDriver driver;
@@ -434,6 +433,73 @@ public class AcceptanceTestsTest {
 	 *		I WOULD LIKE TO REGISTER ON ARCHWIKI. 
 	 *		IN ORDER TO BECOME A MEMBER. 
 	 */
+	
+	/**
+	 * GIVEN that I am on main arch page
+	 * WHEN I click create account
+	 * THEN I should receive a page with fields:
+	 *		USERNAME AND PASSWORD AND CONFIRM PASSWORD AND EMAIL ADDRESS AND ANSWER
+	 * AND a create your account button
+	 **/
+	@Test
+	public void checkCreateAccount() {
+		// announce test and build expections
+		System.out.printf("checkCreateAccount: Testing that the create account button takes user to enter information\n");
+
+		String page_url = "https://wiki.archlinux.org";
+		String link_name = "create account";
+		String expected_title = "Create account - ArchWiki";
+
+		// go to the main archwiki page
+		driver.get(page_url);
+
+		// click the create account button trying to go to create account page
+		try {
+			WebElement create_account_link = driver.findElement(By.linkText(link_name));
+			create_account_link.click();
+			String received_title = driver.getTitle();
+			assertTrue(received_title.equals(expected_title));
+		
+			// check forms in order 
+			WebElement user_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpName2"));		
+			String un_phtext = user_name_form.getAttribute("placeholder");
+			assertTrue(String.format("Form does not exist"), un_phtext.equals("Enter your username"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", un_phtext);	
+
+			WebElement password_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpPassword2"));		
+			String pass_phtext = password_form.getAttribute("placeholder");
+			assertTrue(String.format("Form does not exist"), pass_phtext.equals("Enter a password"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", pass_phtext);	
+
+			WebElement retype_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpRetype"));		
+			String rt_phtext = retype_form.getAttribute("placeholder");
+			assertTrue(String.format("Form does not exist"), rt_phtext.equals("Enter password again"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", rt_phtext);	
+
+			WebElement email_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpEmail"));		
+			String email_phtext = email_form.getAttribute("placeholder");
+			assertTrue(String.format("Form does not exist"), email_phtext.equals("Enter your email address"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", email_phtext);	
+
+			WebElement real_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpRealName"));		
+			String rn_phtext = real_name_form.getAttribute("name");
+			assertTrue(String.format("Form does not exist"), rn_phtext.equals("wpRealName"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", rn_phtext);	
+
+			WebElement question_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#FunnyAnswer"));		
+			String qst_name = question_form.getAttribute("name");
+			assertTrue(String.format("Form does not exist"), qst_name.equals("FunnyAnswer"));			
+			System.out.printf("Form with '%s' exists.  Continuing...\n", qst_name);	
+
+
+
+		} catch (NoSuchElementException ex) {
+			fail();
+		} catch (WebDriverException wdEx) {
+			fail(String.format("Element is not clickable\n"));
+		}
+	}
+				
 
 
 
