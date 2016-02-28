@@ -371,21 +371,59 @@ public class AcceptanceTestsTest {
 	 */
 
 	/**
-  	 * Make sure that clicking the history tab takes user to revision history for the page
-	 */	 
+	 * Make sure that the history tab exists for a given page - MTP as an example
+	 */
 	@Test
 	public void checkHistoryExistence() {
 		// announce test and build expectations
-        System.out.printf("historyTabExistence: Testing that the history tab  exists on the MTP page...\n");
+        System.out.printf("historyTabCorrectness: Testing that the history tab of MTP page takes user to MTP revision history...\n");
+		
 		String link_name = "history";
 		String page_url = "https://wiki.archlinux.org/index.php/MTP";
 
+		String expected_title = "Revision history of \"MTP\" - ArchWiki";
+		String received_title;
+			
 		// go to the mtp page on the arch wiki
 		driver.get(page_url);
-		
+
+		// check if history tab exists on MTP page	
 		boolean history_existence =!driver.findElements(By.linkText(link_name)).isEmpty();
-		
 		assertTrue(String.format("The '%s' tab was not found on '%s'", link_name, page_url), history_existence);
+	}
+
+	/**
+  	 * Make sure that clicking the history tab takes user to revision history for the page
+	 */	 
+	@Test
+	public void checkHistoryCorrectness() {
+		// announce test and build expectations
+        System.out.printf("historyTabCorrectness: Testing that the history tab of MTP page takes user to MTP revision history...\n");
+		
+		String link_name = "history";
+		String page_url = "https://wiki.archlinux.org/index.php/MTP";
+
+		String expected_title = "Revision history of \"MTP\" - ArchWiki";
+		String received_title;
+			
+		// go to the mtp page on the arch wiki
+		driver.get(page_url);
+
+		// check if history tab exists on MTP page	
+		boolean history_existence =!driver.findElements(By.linkText(link_name)).isEmpty();
+		assertTrue(String.format("The '%s' tab was not found on '%s'", link_name, page_url), history_existence);
+	
+		// get the history tab web element
+		WebElement history_tab = driver.findElement(By.linkText(link_name));
+
+		// click history tab and check if title of page is "Revision history for "MTP" - ArchWiki"
+		try {
+			history_tab.click();
+			received_title = driver.getTitle();
+			assertTrue(received_title.equals(expected_title));				
+		} catch (WebDriverException wdEx) {
+			fail(String.format("Element is not clickable\n"));
+		}
 	}
 	
 	/**
