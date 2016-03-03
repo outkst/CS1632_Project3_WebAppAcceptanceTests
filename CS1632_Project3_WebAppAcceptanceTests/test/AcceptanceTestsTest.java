@@ -81,8 +81,8 @@ public class AcceptanceTestsTest {
     @Test
     public void searchForBeginnersGuide() {
         // announce test and build expectations
-        System.out.println("searchForBeginnersGuide: Testing search box for the 'Beginners Guide'");
-        String searchKeyword = "Beginners guide";
+        System.out.println("searchForBeginnersGuide: Testing search box for the 'Beginners' Guide'");
+        String searchKeyword = "Beginners' guide";
         
         try {
             // use helper method
