@@ -519,17 +519,17 @@ public class AcceptanceTestsTest {
 		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable ");
 
 		// go to the mtp page history
-	/*	driver.get(page_url);
+	driver.get(page_url);
 
 		try {
 		// get a radio button 
-		WebElement history_radio = driver.findElement(By.cssSelector("ul#pagehistory li.before input#mw-diff-419559"));
-		//history_radio.click();
-		boolean selected = history_radio.isSelected();
+    	WebElement radio_button = driver.findElement(By.id("mw-diff-421473"));
+		radio_button.click();
+		boolean selected = radio_button.isSelected();
 		assertTrue(selected);
 		} catch (WebDriverException wdEx) {
 			fail(String.format("Element is not clickable\n"));
-		}*/
+		}
 	}
 
 	/**
