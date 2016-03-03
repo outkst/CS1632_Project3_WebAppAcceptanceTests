@@ -301,6 +301,21 @@ public class AcceptanceTestsTest {
         }
     }
 
+	/**
+	 * User enter valid user name and incorrect password.
+	 **/
+	@Test
+	public void testWrongPassWord() {
+		// announce test and build expectations
+		System.out.printf("testWrongPassword: Testing invalid password for login...\n");
+		
+		String login_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&returnto=MTP&returntoquery=type%3Drevision%26diff%3D421473%26oldid%3D420213";
+	}	
+		
+		
+		
+		
+		
 /********************************************************************************************************************************************************************/
 
 	/**
