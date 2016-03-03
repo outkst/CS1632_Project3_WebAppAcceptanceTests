@@ -43,6 +43,9 @@ public class AcceptanceTestsTest {
         driver.quit();
     }
 
+/********************************************************************************************************************************************************************/
+
+
 	/**
 	 * AS A USER.
 	 * I WOULD LIKE TO GO TO ARCH WIKI.
@@ -161,7 +164,8 @@ public class AcceptanceTestsTest {
         // test complete
         System.out.println("\tsearchForForumEtiquette: Success!");
     }
-    
+
+
     /**
      * Helper method for running the Search tests.
      * 
@@ -223,6 +227,7 @@ public class AcceptanceTestsTest {
         System.out.println("\tsearchResultsContainerExists: Success!");
     }
 
+/********************************************************************************************************************************************************************/
 
 	/**
 	 * USER STORY:  
@@ -295,6 +300,8 @@ public class AcceptanceTestsTest {
             }
         }
     }
+
+/********************************************************************************************************************************************************************/
 
 	/**
 	 * USER STORY
@@ -396,6 +403,7 @@ public class AcceptanceTestsTest {
         System.out.println("\tverifyLoginForm: Success!");
     }
     
+/********************************************************************************************************************************************************************/
 
 	/**
 	 * USER STORY:
@@ -444,6 +452,8 @@ public class AcceptanceTestsTest {
 			fail(String.format("The Arch Linux Logo was not found at '%s'", logoID));
 		}
 	}
+
+/********************************************************************************************************************************************************************/
 
 	/**
 	 * USER STORY:
@@ -611,14 +621,14 @@ public class AcceptanceTestsTest {
 			String received_title = driver.getTitle();
 
 			assertTrue(received_title.contains(expected_title));	
-			
-
 
 		} catch (WebDriverException wdEx) {
 			fail("Exception received: Test failure");	
 		
 		}	
 	}
+
+/********************************************************************************************************************************************************************/
 
 	/**
 	 * USER STORY:
