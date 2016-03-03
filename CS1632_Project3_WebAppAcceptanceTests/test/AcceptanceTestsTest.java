@@ -301,6 +301,43 @@ public class AcceptanceTestsTest {
         }
     }
 
+    /**
+     * Make sure the username input, password input, "remember me" checkbox, 
+     *      and submit button exists for proper creation of account.
+     */
+    @Test
+    public void verifyLoginForm() {
+        // announce test and build expectations
+        System.out.println("verifyLoginForm: Testing that the username/password/'remember me'/submit controls exist...");
+        String username = "wpName1";
+        String password = "wpPassword1";
+        String rememberMe = "wpRemember";
+        String login = "wpLoginAttempt";
+
+        // go to the main arch wiki page
+        driver.get("https://wiki.archlinux.org/index.php/Special:UserLogin");
+
+        boolean elemExists;
+        // see if the username control exists
+        elemExists = !driver.findElements(By.id(username)).isEmpty();
+        assertTrue(String.format("Cannot find the username control '%s'.", username), elemExists);
+        
+        // see if the password control exists
+        elemExists = !driver.findElements(By.id(password)).isEmpty();
+        assertTrue(String.format("Cannot find the password control '%s'.", password), elemExists);
+        
+        // see if the "Remember Me" control exists
+        elemExists = !driver.findElements(By.id(rememberMe)).isEmpty();
+        assertTrue(String.format("Cannot find the 'remember me' control '%s'.", rememberMe), elemExists);
+        
+        // see if the Login button control exists
+        elemExists = !driver.findElements(By.id(login)).isEmpty();
+        assertTrue(String.format("Cannot find the login button control '%s'.", login), elemExists);
+        
+        // test complete
+        System.out.println("\tverifyLoginForm: Success!");
+    }
+
 	/**
 	 * User enter valid user name and incorrect password.
 	 **/
@@ -308,10 +345,48 @@ public class AcceptanceTestsTest {
 	public void testWrongPassWord() {
 		// announce test and build expectations
 		System.out.printf("testWrongPassword: Testing invalid password for login...\n");
-		
 		String login_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&returnto=MTP&returntoquery=type%3Drevision%26diff%3D421473%26oldid%3D420213";
+	
+        String username = "wpName1";
+        String password = "wpPassword1";
+        String rememberMe = "wpRemember";
+        String login = "wpLoginAttempt";
+	
+		WebElement username_field;
+		WebElement password_field;
+		WebElement login_button;
+
+		// go to the login page for the arch wiki
+		driver.get(login_url);
+
+		// RECHECK THAT LOGIN FORM IS CORRECT
+        boolean elemExists;
+        // see if the username control exists
+		username_field = driver.findElement(By.id(username));
+        elemExists = !driver.findElements(By.id(username)).isEmpty();
+        assertTrue(String.format("Cannot find the username control '%s'.", username), elemExists);
+        
+        // see if the password control exists
+		password_field = driver.findElement(By.id(password));
+        elemExists = !driver.findElements(By.id(password)).isEmpty();
+        assertTrue(String.format("Cannot find the password control '%s'.", password), elemExists);
+        
+        // see if the "Remember Me" control exists
+        elemExists = !driver.findElements(By.id(rememberMe)).isEmpty();
+        assertTrue(String.format("Cannot find the 'remember me' control '%s'.", rememberMe), elemExists);
+        
+        // see if the Login button control exists
+		login_button = driver.findElement(By.id(login));
+        elemExists = !driver.findElements(By.id(login)).isEmpty();
+        assertTrue(String.format("Cannot find the login button control '%s'.", login), elemExists);
+
+		username_field.sendKeys("Cs1632archtest");
+		password_field.sendKeys("Kittypaws");	
+		login_button.click();	
+	
+		String bodyText = driver.findElement(By.className("errorbox")).getText();
+		assertTrue("Text not found!", bodyText.contains("Login error"));
 	}	
-		
 		
 		
 		
@@ -379,43 +454,6 @@ public class AcceptanceTestsTest {
         
         // test complete
         System.out.println("\tmenuBarCorrectness: Success!");
-    }
-    
-    /**
-     * Make sure the username input, password input, "remember me" checkbox, 
-     *      and submit button exists for proper creation of account.
-     */
-    @Test
-    public void verifyLoginForm() {
-        // announce test and build expectations
-        System.out.println("verifyLoginForm: Testing that the username/password/'remember me'/submit controls exist...");
-        String username = "wpName1";
-        String password = "wpPassword1";
-        String rememberMe = "wpRemember";
-        String login = "wpRemember";
-
-        // go to the main arch wiki page
-        driver.get("https://wiki.archlinux.org/index.php/Special:UserLogin");
-
-        boolean elemExists;
-        // see if the username control exists
-        elemExists = !driver.findElements(By.id(username)).isEmpty();
-        assertTrue(String.format("Cannot find the username control '%s'.", username), elemExists);
-        
-        // see if the password control exists
-        elemExists = !driver.findElements(By.id(password)).isEmpty();
-        assertTrue(String.format("Cannot find the password control '%s'.", password), elemExists);
-        
-        // see if the "Remember Me" control exists
-        elemExists = !driver.findElements(By.id(rememberMe)).isEmpty();
-        assertTrue(String.format("Cannot find the 'remember me' control '%s'.", rememberMe), elemExists);
-        
-        // see if the Login button control exists
-        elemExists = !driver.findElements(By.id(login)).isEmpty();
-        assertTrue(String.format("Cannot find the login button control '%s'.", login), elemExists);
-        
-        // test complete
-        System.out.println("\tverifyLoginForm: Success!");
     }
     
 /********************************************************************************************************************************************************************/
@@ -920,7 +958,9 @@ public class AcceptanceTestsTest {
 			fail();
 		}
 	}
-	
+
+/********************************************************************************************************************************************************************/
+
 	/**
      * This main method runs our test suite
      * 
