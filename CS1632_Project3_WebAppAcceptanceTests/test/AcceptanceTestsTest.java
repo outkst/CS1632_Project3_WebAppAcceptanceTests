@@ -514,8 +514,9 @@ public class AcceptanceTestsTest {
 	@Test
 	public void checkHistoryRadioButtons() {
 		// announce test and build expectations
-		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable "); 
+		System.out.printf("checkHIstoryRadioButtons()"); 
 		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history";
+		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable ");
 
 		// go to the mtp page history
 	driver.get(page_url);
@@ -608,6 +609,7 @@ public class AcceptanceTestsTest {
 
 	/**
 	 * This is a helper function to check user input fields
+        * @param driver
 	 **/
 	public void checkUserInputForms(FirefoxDriver driver) {
 
