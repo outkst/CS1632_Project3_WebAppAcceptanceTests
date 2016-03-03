@@ -513,7 +513,6 @@ public class AcceptanceTestsTest {
 		}
 	}
 
-
 	/**
 	 * GIVEN that I am on create account page for arch wiki 
 	 * WHEN I enter username, password, password_retype, email, and answer
@@ -537,7 +536,6 @@ public class AcceptanceTestsTest {
 		String real_name = "Nope";
 		/* THIS WORKS AS OF pacman v5.0.1 - libalpm V10.0.1 */	
 		String fun_answer = "BIQC4LJNFYQCAIBAEAQCAIBAEAQCAIBAEAQCAICQMFRW2YLOEB3DKLRQFYYSALJANRUWEYLMOBWS";
-
 
 		// go to create account page of arch wiki
 		driver.get(page_url);
@@ -566,7 +564,7 @@ public class AcceptanceTestsTest {
 			// click submit button now that all fields are full
 			WebElement submit_button = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpCreateaccount"));		
 			submit_button.click();
-			
+		
 			String bodyText = driver.findElement(By.tagName("body")).getText();
 			assertTrue("Text not found!", bodyText.contains(expected_text));	
 
@@ -574,7 +572,67 @@ public class AcceptanceTestsTest {
 			fail();
 		}
 	}	
+
+	/**
+	 * GIVEN that I am on create account page for arch wiki 
+	 * WHEN I enter username, password, password_retype, email, and answer
+	 * AND THERE EXISTS username SUCH THAT username EXISTS IN DB 
+	 * AND I click Create account button
+	 * Then I should be on create account page with Account creation error: Username entered already in use
+     * text on page 
+	 **/
+	@Test
+	public void testNonUniquePassword() {
+		// announce test and build expections
+		System.out.printf("testFailedPasswordRetype: Testing that the that incorrect password retype on account creation is rejected\n");
+
+		String page_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&type=signup";
+	
+		String expected_text = "Username entered already in use";
+
+		String user_name = "cs1632archtest";
+		String password_1 = "T0t3sSequre";
+		String password_2 = "yellow";
+		String email_entry = "cs1632deliverable3@gmail.com";
+		String real_name = "Nope";
+		/* THIS WORKS AS OF pacman v5.0.1 - libalpm V10.0.1 */	
+		String fun_answer = "BIQC4LJNFYQCAIBAEAQCAIBAEAQCAIBAEAQCAICQMFRW2YLOEB3DKLRQFYYSALJANRUWEYLMOBWS";
+
+		// go to create account page of arch wiki
+		driver.get(page_url);
+
+		try {
+			checkUserInputForms(driver);
+
+			WebElement user_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpName2"));		
+			user_name_form.sendKeys(user_name);	
 			
+			WebElement password_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpPassword2"));		
+			password_form.sendKeys(password_1);
+			
+			WebElement retype_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpRetype"));		
+			password_form.sendKeys(password_2);	
+
+			WebElement email_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpEmail"));		
+			email_form.sendKeys(email_entry);
+
+			WebElement real_name_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpRealName"));		
+			real_name_form.sendKeys(real_name);
+
+			WebElement question_form = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#FunnyAnswer"));		
+			question_form.sendKeys(fun_answer);	
+
+			// click submit button now that all fields are full
+			WebElement submit_button = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpCreateaccount"));		
+			submit_button.click();
+		
+			String bodyText = driver.findElement(By.tagName("body")).getText();
+			assertTrue("Text not found!", bodyText.contains(expected_text));	
+
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
+	}
 			
 	/**
      * This main method runs our test suite
