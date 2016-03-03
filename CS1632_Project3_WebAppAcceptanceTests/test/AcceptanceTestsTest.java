@@ -594,7 +594,9 @@ public class AcceptanceTestsTest {
 	 */
 
 	/**
-	 * Make sure that the history tab exists for a given page - MTP as an example
+	 * GIVEN that I am on the MTP page on the ARCH linux wikipedia
+	 * WHEN look at the beginning of the page
+     * THEN I should find a tab to the page's history.	 
 	 */
 	@Test
 	public void checkHistoryExistence() {
@@ -616,7 +618,9 @@ public class AcceptanceTestsTest {
 	}
 
 	/**
-  	 * Make sure that clicking the history tab takes user to revision history for the page
+	 * GIVEN that I am on the MTP page on the ARCH linux wikipedia
+	 * WHEN click the history tab 
+     * THEN I should be taken to the MTP page's history.	 
 	 */	 
 	@Test
 	public void checkHistoryCorrectness() {
@@ -650,7 +654,9 @@ public class AcceptanceTestsTest {
 	}
 
 	/**
-	 * Make sure that the radio buttons on the page are clickable
+	 * GIVEN that I am on the MTP History page on the ARCH linux wikipedia
+	 * WHEN I click a radio button for a particular change 
+     * THEN the radio button I clicked should be selected.	 
 	 **/
 	@Test
 	public void checkHistoryRadioButtons() {
@@ -674,7 +680,10 @@ public class AcceptanceTestsTest {
 	}
 
 	/**
-	 * Make sure that history can be checked back in time
+	 * GIVEN that I am on the MTP History page on the ARCH linux wikipedia
+	 * WHEN I change the search date
+	 *    OR change the month  
+     * THEN the revision page should display revisions from the searched timeperiod 	 
 	 **/
 	@Test
 	public void checkHistoryTimes() {
@@ -723,7 +732,10 @@ public class AcceptanceTestsTest {
 	}
 
 	/**
-	 * Check that comparison of revisions works
+	 * GIVEN that I am on the MTP History page on the ARCH linux wikipedia
+	 * WHEN I select two revisions 
+	 *    AND press the compare revisions button  
+     * THEN I should be able to find the differences between revisions. 	 
 	 **/
 	@Test
 	public void testRevisionComparison() {
