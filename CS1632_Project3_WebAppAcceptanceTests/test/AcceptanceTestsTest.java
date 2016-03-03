@@ -387,10 +387,66 @@ public class AcceptanceTestsTest {
 		String bodyText = driver.findElement(By.className("errorbox")).getText();
 		assertTrue("Text not found!", bodyText.contains("Login error"));
 	}	
-		
-		
-		
-		
+
+	/**
+  	 * User enters valid <username, password> pair.
+	 **/
+	@Test
+	public void testValidLogin() {
+		// announce test and build expectations
+		System.out.printf("testWrongPassword: Testing invalid password for login...\n");
+		String login_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&returnto=MTP&returntoquery=type%3Drevision%26diff%3D421473%26oldid%3D420213";
+	
+        String username = "wpName1";
+        String password = "wpPassword1";
+        String rememberMe = "wpRemember";
+        String login = "wpLoginAttempt";
+	
+		WebElement username_field;
+		WebElement password_field;
+		WebElement login_button;
+
+		WebElement account_name;
+		WebElement logout_link;
+
+		// go to the login page for the arch wiki
+		driver.get(login_url);
+
+		// RECHECK THAT LOGIN FORM IS CORRECT
+        boolean elemExists;
+        // see if the username control exists
+		username_field = driver.findElement(By.id(username));
+        elemExists = !driver.findElements(By.id(username)).isEmpty();
+        assertTrue(String.format("Cannot find the username control '%s'.", username), elemExists);
+        
+        // see if the password control exists
+		password_field = driver.findElement(By.id(password));
+        elemExists = !driver.findElements(By.id(password)).isEmpty();
+        assertTrue(String.format("Cannot find the password control '%s'.", password), elemExists);
+        
+        // see if the "Remember Me" control exists
+        elemExists = !driver.findElements(By.id(rememberMe)).isEmpty();
+        assertTrue(String.format("Cannot find the 'remember me' control '%s'.", rememberMe), elemExists);
+        
+        // see if the Login button control exists
+		login_button = driver.findElement(By.id(login));
+        elemExists = !driver.findElements(By.id(login)).isEmpty();
+        assertTrue(String.format("Cannot find the login button control '%s'.", login), elemExists);
+
+		username_field.sendKeys("Cs1632archtest");
+		password_field.sendKeys("archtest");	
+	
+/*		login_button.click();
+
+		account_name = driver.findElement(By.cssSelector("div.pbody ul li#pt-userpage a.new"));
+   		String expected_name = account_name.getText(); 
+    	driver.findElement(By.linkText("Log out")).click();
+		assertTrue(expected_name.equals("Cs1632archtest")); */	
+	}
+
+
+
+
 /********************************************************************************************************************************************************************/
 
 	/**
@@ -723,6 +779,7 @@ public class AcceptanceTestsTest {
 		} catch (WebDriverException wdEx) {
 			fail(String.format("Element is not clickable\n"));
 		}
+		
 	}
 
 	/**
