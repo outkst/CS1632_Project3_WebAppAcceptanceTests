@@ -468,7 +468,41 @@ public class AcceptanceTestsTest {
 			fail(String.format("Element is not clickable\n"));
 		}
 	}
-	
+
+	/**
+	 * GIVEN that I am on main arch page
+	 * WHEN I click create account
+	 * THEN I should see the message that ArchWiki is made by people like you. 
+	 **/
+	@Test
+	public void checkHappyWikiMessage() {
+		// announce test and build expections
+		System.out.printf("checkCreateAccount: Testing that the create account button takes user to enter information\n");
+
+		String page_url = "https://wiki.archlinux.org";
+		String link_name = "create account";
+		String expected_text = "ArchWiki is made by people like you.";
+		String received_text;
+
+		// go to the main archwiki page
+		driver.get(page_url);
+
+		// click the create account button trying to go to create account page
+		try {
+			WebElement create_account_link = driver.findElement(By.linkText(link_name));
+			create_account_link.click();
+			WebElement benefits_header= driver.findElement(By.cssSelector("div.mw-createacct-benefits-container h2"));
+			received_text = benefits_header.getText();
+			assertEquals(String.format("Benefits text does not exist!"), received_text, expected_text);
+
+		} catch (NoSuchElementException ex) {
+			fail();
+		} catch (WebDriverException wdEx) {
+			fail(String.format("Element is not clickable\n"));
+		}
+	}
+
+
 	public void checkUserInputForms(FirefoxDriver driver) {
 
 			// check forms with consideration for ordering 
@@ -584,7 +618,7 @@ public class AcceptanceTestsTest {
 	@Test
 	public void testNonUniquePassword() {
 		// announce test and build expections
-		System.out.printf("testFailedPasswordRetype: Testing that the that incorrect password retype on account creation is rejected\n");
+		System.out.printf("testNonUniquePassword: Testing that the that entered password is unique and fails otherwise\n");
 
 		String page_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&type=signup";
 	
@@ -633,7 +667,41 @@ public class AcceptanceTestsTest {
 			fail();
 		}
 	}
+	
+
+
+	/**
+	 * GIVEN that I am on create account page for arch wiki 
+	 * WHEN I don't enter username, password, password_retype, email, and answer  
+	 * AND I click Create account button
+	 * Then I should be on create account page with Account creation error. 
+	 **/
+	@Test
+	public void testNoEnteryForAccountCreation() {
+		// announce test and build expections
+		System.out.printf("testNoEnteryForAccountCreation: Testing fields have to be filled when creating an account\n");
+
+		String page_url = "https://wiki.archlinux.org/index.php?title=Special:UserLogin&type=signup";
+		
+		String expected_text = "Account creation error";
+		
+		// go to create account page of arch wiki
+		driver.get(page_url);
+
+		try {
+			checkUserInputForms(driver);
 			
+			WebElement submit_button = driver.findElement(By.cssSelector("div#userloginForm  div.mw-ui-vform-field input#wpCreateaccount"));		
+			submit_button.click();
+		
+			String bodyText = driver.findElement(By.tagName("body")).getText();
+			assertTrue("Text not found!", bodyText.contains(expected_text));	
+
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
+	}
+	
 	/**
      * This main method runs our test suite
      * 
