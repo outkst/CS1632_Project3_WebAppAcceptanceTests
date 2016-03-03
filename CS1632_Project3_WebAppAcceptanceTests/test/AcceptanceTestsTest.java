@@ -241,8 +241,9 @@ public class AcceptanceTestsTest {
     /******************************************************************************************************************
      *  USER STORY: AS A MEMBER. 
      *              I WOULD LIKE TO LOGIN TO ARCHWIKI. 
-     *              IN ORDER TO EDIT A PAGE.
+     *              IN ORDER TO CHECK MEMBERSHIP.
      */
+    
     /**
      * GIVEN that I am on the main page for the arch wiki 
      * WHEN look for account controls 
@@ -468,7 +469,7 @@ public class AcceptanceTestsTest {
     /**
      * Make sure that Menu bar is available on the main page
      */
-    @Test
+   /* @Test
     public void menuBarExistence() {
         // announce test and build expectations
         System.out.printf("menuBarExistence: Testing that the menu bar exists on the main page...\n");
@@ -480,13 +481,13 @@ public class AcceptanceTestsTest {
         // try to grab the ul with nav bar
         boolean menuBarExists = !driver.findElements(By.id(menuBarName)).isEmpty();
         assertTrue(String.format("The menu bar '%s' cannot be found.", menuBarName), menuBarExists);
-    }
+    }*/
 
     /**
      * Make sure that the Menu bar on the main page has the items "Home" "Packages" "Forums" "Wiki" "Bugs" "AUR"
      * "Download"
      */
-    @Test
+    /*@Test
     public void menuBarCorrectness() {
         // announce test and build expectations
         System.out.printf("menuBarCorrectness: Testing that the menu bar exists and has the 7 correct elements...\n");
@@ -519,7 +520,7 @@ public class AcceptanceTestsTest {
 
         // test complete
         System.out.println("\tmenuBarCorrectness: Success!");
-    }
+    } */
 
     /******************************************************************************************************************
      * USER STORY:  AS A USER. 
@@ -529,8 +530,8 @@ public class AcceptanceTestsTest {
     /**
      * Make sure that the ArchLinux logo exists on the main page
      */
-    @Test
-    public void archLogoExistence() {
+    /*@Test
+    //public void archLogoExistence() {
         // announce test and build expectations
         System.out.printf("archLogoExistence: Testing that the logo exists on the main page...\n");
         String logoID = "logo";
@@ -542,13 +543,13 @@ public class AcceptanceTestsTest {
         boolean logoExists = !driver.findElements(By.id(logoID)).isEmpty();
 
         assertTrue(String.format("Cannot find the Arch Linux Logo at id '%s'.", logoID), logoExists);
-    }
+    } */
 
     /**
      * Make sure that the ArchLinux logo when clicked takes to user to ArchLinux.org
      */
-    @Test
-    public void archLogoCorrectness() {
+    /*@Test
+    //public void archLogoCorrectness() {
         // announce test and build expectations
         System.out.printf("archLogoExistence: Testing that the logo exists on the main page...\n");
         String logoID = "logo";
@@ -565,7 +566,7 @@ public class AcceptanceTestsTest {
         } catch (NoSuchElementException ex) {
             fail(String.format("The Arch Linux Logo was not found at '%s'", logoID));
         }
-    }
+    } */
 
     /******************************************************************************************************************
      * USER STORY:  AS A USER. 
