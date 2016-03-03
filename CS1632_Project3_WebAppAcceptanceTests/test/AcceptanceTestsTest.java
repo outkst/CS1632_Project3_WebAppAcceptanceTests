@@ -508,7 +508,16 @@ public class AcceptanceTestsTest {
 		}
 	}
 
-	/* I will write this since I can generate the pacman string and also make another dummy gmail account*/
+	/**
+	 * Make sure that the radio buttons on the page are clickable
+	 **/
+	@Test
+	public void checkHistoryRadioButtons() {
+		// announce test and build expectations
+		System.out.printf("checkHIstoryRadioButtons()"); 
+		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history"
+		}
+	}
 
 	/**
 	 * USER STORY:
@@ -585,7 +594,9 @@ public class AcceptanceTestsTest {
 		}
 	}
 
-
+	/**
+	 * This is a helper function to check user input fields
+	 **/
 	public void checkUserInputForms(FirefoxDriver driver) {
 
 			// check forms with consideration for ordering 
