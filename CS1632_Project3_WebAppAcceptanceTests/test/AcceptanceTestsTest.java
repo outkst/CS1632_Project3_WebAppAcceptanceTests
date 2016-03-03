@@ -548,14 +548,47 @@ public class AcceptanceTestsTest {
 		driver.get(page_url);
 
 		try {
-		// get a radio button 
+		// get list of months from drop-down menu	
 		List<WebElement> monthElements = driver.findElements(By.cssSelector(monthsCSSPath));
+		// check that the options in the drop-down menu are correct and in order	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "all"), monthElements.get(0).getText(), "all");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "January"), monthElements.get(1).getText(), "January");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "February"), monthElements.get(2).getText(), "February");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "March"), monthElements.get(3).getText(), "March");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "April"), monthElements.get(4).getText(), "April");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "May"), monthElements.get(5).getText(), "May");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "June"), monthElements.get(6).getText(), "June");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "July"), monthElements.get(7).getText(), "July");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "August"), monthElements.get(8).getText(), "August");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "September"), monthElements.get(9).getText(), "September");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "October"), monthElements.get(10).getText(), "October");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "November"), monthElements.get(11).getText(), "November");	
+		assertEquals(String.format("The month list item'%s' cannot be found.", "December"), monthElements.get(12).getText(), "December");	
+		
+		// check that the year field is enterable and go works 
 
-			
-			
+		// get the year field
+		WebElement year_input = driver.findElement(By.cssSelector("fieldset#mw-history-search input#year"));
+		year_input.sendKeys(Keys.chord(Keys.CONTROL, "a"), "2014");
+
+		// get the 'Go' button for the search
+		driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+
+		String bodyText = driver.findElement(By.tagName("body")).getText();
+		assertTrue("Text not found!", bodyText.contains("23 December 2014"));
+
 		} catch (WebDriverException wdEx) {
-			fail();	
+			fail("ELEMENT IS NOT CLICKABLE");	
 		}
+	}
+
+	/**
+	 * Check that comparison of revisions works
+	 **/
+	@Test
+	public void testRevisionComparison() {
+		// announce test and build expectations
+
 	}
 
 	/**
