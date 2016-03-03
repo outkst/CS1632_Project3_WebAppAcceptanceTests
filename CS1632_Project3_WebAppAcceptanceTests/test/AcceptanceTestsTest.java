@@ -53,7 +53,9 @@ public class AcceptanceTestsTest {
 	 */
 
     /**
-     * Make sure the home page is reachable and correct.
+     * GIVEN that I have a browser open
+	 * WHEN I enter https://wiki.archlinux.org
+	 * THEN I will be on the archlinux wikipedia homepage 
      */
     @Test
     public void visitMainPage() {
@@ -79,7 +81,10 @@ public class AcceptanceTestsTest {
 
     
     /**
-     * Use the search box and look for the "Beginners Guide".
+     * GIVEN that I am on the archlinux home page
+	 * WHEN I search for a begginer guide
+	 * AND I press the search button
+	 * THEN I should be on the Beginners Guide Page  
      */
     @Test
     public void searchForBeginnersGuide() {
@@ -103,7 +108,10 @@ public class AcceptanceTestsTest {
     }
     
     /**
-     * Use the search box and look for the "Installation Guide".
+     * GIVEN that I am on the archlinux home page
+	 * WHEN I search for a installation guide 
+	 * AND I press the search button
+	 * THEN I should be on the Installation Guide page 
      */
     @Test
     public void searchForInstallationGuide() {
@@ -124,7 +132,10 @@ public class AcceptanceTestsTest {
     }
     
     /**
-     * Use the search box and look for the "Installation Guide".
+     * GIVEN that I am on the archlinux home page
+	 * WHEN I search for irc channels 
+	 * AND I press the search button
+	 * THEN I should be on the IRC channels page 
      */
     @Test
     public void searchForIRCChannels() {
@@ -145,7 +156,10 @@ public class AcceptanceTestsTest {
     }
     
     /**
-     * Use the search box and look for the "Installation Guide".
+     * GIVEN that I am on the archlinux home page
+	 * WHEN I search for forum etiquette 
+	 * AND I press the search button
+	 * THEN I should be on the forum etiquette page 
      */
     @Test
     public void searchForForumEtiquette() {
@@ -196,8 +210,10 @@ public class AcceptanceTestsTest {
     }
 
     /**
-     * Tests to make sure the search results container is shown when a
-     *      fuzzy search is performed.
+     * GIVEN that I am on the archlinux home page
+	 * WHEN I search for an arbitary string
+	 * AND I press the search button
+	 * THEN I should be given a list of search results 
      */
     @Test
     public void searchResultsContainerExists() {
@@ -443,8 +459,6 @@ public class AcceptanceTestsTest {
     	driver.findElement(By.linkText("Log out")).click();
 		assertTrue(expected_name.equals("Cs1632archtest")); */	
 	}
-
-
 
 
 /********************************************************************************************************************************************************************/
