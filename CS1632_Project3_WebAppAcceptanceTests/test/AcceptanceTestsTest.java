@@ -589,7 +589,7 @@ public class AcceptanceTestsTest {
 		// announce test and build expectations
 		System.out.printf("testRevisionComparison: check that two revisions can be compared and differences will be displayed\n");
 		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history";
-		
+		String expected_title = "Difference between revisions of \"MTP\"";	
 		boolean selected;
 		// go to mtp page history
 		driver.get(page_url);
@@ -606,6 +606,14 @@ public class AcceptanceTestsTest {
 			selected = radio_button_2.isSelected();
 			assertTrue(selected);
 			
+    		driver.findElement(By.cssSelector("input.historysubmit.mw-history-compareselectedversions-button")).click();
+		
+			String received_title = driver.getTitle();
+
+			assertTrue(received_title.contains(expected_title));	
+			
+
+
 		} catch (WebDriverException wdEx) {
 			fail("Exception received: Test failure");	
 		
