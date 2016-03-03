@@ -515,8 +515,7 @@ public class AcceptanceTestsTest {
 	public void checkHistoryRadioButtons() {
 		// announce test and build expectations
 		System.out.printf("checkHIstoryRadioButtons()"); 
-		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history"
-		}
+		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history";
 	}
 
 	/**
@@ -596,6 +595,7 @@ public class AcceptanceTestsTest {
 
 	/**
 	 * This is a helper function to check user input fields
+        * @param driver
 	 **/
 	public void checkUserInputForms(FirefoxDriver driver) {
 
