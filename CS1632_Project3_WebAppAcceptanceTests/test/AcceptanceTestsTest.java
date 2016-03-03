@@ -253,7 +253,9 @@ public class AcceptanceTestsTest {
 	 */
 
     /**
-     * Make sure the div container exists for the account controls.
+	 * GIVEN that I am on the main page for the  arch wiki 
+	 * WHEN look for account controls  
+	 * Then I should be able to find account controls. 
      */
     @Test
     public void loginControlsDivExists() {
@@ -273,8 +275,9 @@ public class AcceptanceTestsTest {
     }
 
     /**
-     * Make sure the login button exists, if the user is NOT logged-in currently. (First checks if the div container for
-     * the account controls exists).
+	 * GIVEN that I am on the main page for arch wiki 
+	 * WHEN look for login button.  
+	 * Then I should be able to find a login button. 
      */
     @Test
     public void loginButtonExists() {
@@ -318,8 +321,9 @@ public class AcceptanceTestsTest {
     }
 
     /**
-     * Make sure the username input, password input, "remember me" checkbox, 
-     *      and submit button exists for proper creation of account.
+	 * GIVEN that I am on login page for arch wiki 
+	 * WHEN I want to login   
+	 * THEN there should be fields for username, password, remember login, and a button to login with. 
      */
     @Test
     public void verifyLoginForm() {
@@ -355,7 +359,9 @@ public class AcceptanceTestsTest {
     }
 
 	/**
-	 * User enter valid user name and incorrect password.
+	 * GIVEN that I am on login page for arch wiki 
+	 * WHEN I enter an invalid <username, password> pair   
+	 * THEN I should receive a login error. 
 	 **/
 	@Test
 	public void testWrongPassWord() {
@@ -405,7 +411,9 @@ public class AcceptanceTestsTest {
 	}	
 
 	/**
-  	 * User enters valid <username, password> pair.
+	 * GIVEN that I am on login page for arch wiki 
+	 * WHEN I enter avalid <username, password> pair   
+	 * THEN I should be logged into arch wiki. 
 	 **/
 	@Test
 	public void testValidLogin() {
@@ -1002,7 +1010,7 @@ public class AcceptanceTestsTest {
 	 * GIVEN that I am on create account page for arch wiki 
 	 * WHEN I don't enter username, password, password_retype, email, and answer  
 	 * AND I click Create account button
-	 * Then I should be on create account page with Account creation error. 
+	 * THEN I should be on create account page with Account creation error. 
 	 **/
 	@Test
 	public void testNoEnteryForAccountCreation() {
