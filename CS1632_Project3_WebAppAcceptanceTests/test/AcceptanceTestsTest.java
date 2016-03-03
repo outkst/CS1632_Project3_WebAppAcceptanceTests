@@ -514,9 +514,9 @@ public class AcceptanceTestsTest {
 	@Test
 	public void checkHistoryRadioButtons() {
 		// announce test and build expectations
-		System.out.printf("checkHIstoryRadioButtons()"); 
+		System.out.printf("checkHIstoryRadioButtons()\n"); 
 		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history";
-		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable ");
+		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable\n");
 
 		// go to the mtp page history
 	driver.get(page_url);
@@ -529,6 +529,32 @@ public class AcceptanceTestsTest {
 		assertTrue(selected);
 		} catch (WebDriverException wdEx) {
 			fail(String.format("Element is not clickable\n"));
+		}
+	}
+
+	/**
+	 * Make sure that history can be checked back in time
+	 **/
+	@Test
+	public void checkHistoryTimes() {
+		// announce test and build expectations
+		System.out.printf("checkHIstoryRadioButtons()\n"); 
+		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history";
+		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable\n");
+
+		String monthsCSSPath = String.format("select#month.mw-month-selector option");
+
+		// go to the mtp page history
+		driver.get(page_url);
+
+		try {
+		// get a radio button 
+		List<WebElement> monthElements = driver.findElements(By.cssSelector(monthsCSSPath));
+
+			
+			
+		} catch (WebDriverException wdEx) {
+			fail();	
 		}
 	}
 
@@ -775,8 +801,6 @@ public class AcceptanceTestsTest {
 			fail();
 		}
 	}
-	
-
 
 	/**
 	 * GIVEN that I am on create account page for arch wiki 
