@@ -74,6 +74,31 @@ public class AcceptanceTestsTest {
         System.out.println("\tvisitMainPage: Success!");
     }
 
+    
+    /**
+     * Use the search box and look for the "Beginners Guide".
+     */
+    @Test
+    public void searchForBeginnersGuide() {
+        // announce test and build expectations
+        System.out.println("searchForBeginnersGuide: Testing search box for the 'Beginners Guide'");
+        String searchKeyword = "Beginners guide";
+        
+        try {
+            // use helper method
+            searchForKeyword(searchKeyword);    
+            
+        } catch (NoSuchElementException ex) {
+            fail();
+            
+        } catch (WebDriverException wdEx) {
+            fail(String.format("Element is not clickable\n"));
+        }
+        
+        // test complete
+        System.out.println("\tsearchForBeginnersGuide: Success!");
+    }
+    
     /**
      * Use the search box and look for the "Installation Guide".
      */
@@ -81,8 +106,69 @@ public class AcceptanceTestsTest {
     public void searchForInstallationGuide() {
         // announce test and build expectations
         System.out.println("searchForInstallationGuide: Testing search box for the 'Installation Guide'");
-        String expectedHeaderText = "Installation guide";
-
+        String searchKeyword = "Installation guide";
+        
+        try {
+            // use helper method
+            searchForKeyword(searchKeyword);    
+            
+        } catch (Exception ex) {
+            fail();
+        }
+        
+        // test complete
+        System.out.println("\tsearchForInstallationGuide: Success!");
+    }
+    
+    /**
+     * Use the search box and look for the "Installation Guide".
+     */
+    @Test
+    public void searchForIRCChannels() {
+        // announce test and build expectations
+        System.out.println("searchForIRCChannels: Testing search box for the 'IRC channels' list");
+        String searchKeyword = "IRC channels";
+        
+        try {
+            // use helper method
+            searchForKeyword(searchKeyword);
+            
+        } catch (Exception ex) {
+            fail();
+        }
+        
+        // test complete
+        System.out.println("\tsearchForIRCChannels: Success!");
+    }
+    
+    /**
+     * Use the search box and look for the "Installation Guide".
+     */
+    @Test
+    public void searchForForumEtiquette() {
+        // announce test and build expectations
+        System.out.println("searchForForumEtiquette: Testing search box for the 'Forum etiquette' list");
+        String searchKeyword = "Forum etiquette";
+        
+        try {
+            // use helper method
+            searchForKeyword(searchKeyword);
+            
+        } catch (Exception ex) {
+            fail();
+        }
+        
+        // test complete
+        System.out.println("\tsearchForForumEtiquette: Success!");
+    }
+    
+    /**
+     * Helper method for running the Search tests.
+     * 
+     * @param searchKeyword The keyword (and also the Guide name) to search for.
+     */
+    public void searchForKeyword(String searchKeyword) {
+    
         // go to the main arch wiki page
         driver.get("https://wiki.archlinux.org/");
 
@@ -90,7 +176,7 @@ public class AcceptanceTestsTest {
         element = driver.findElement(By.id("searchInput"));
 
         // enter "Installation Guide" into the search box
-        element.sendKeys("Installation Guide");
+        element.sendKeys(searchKeyword);
 
         // submit using the page's default submit button
         element.submit();
@@ -102,10 +188,7 @@ public class AcceptanceTestsTest {
         String actualHeaderText = element.getText();
 
         // make sure the header text says 'Main page'
-        assertEquals(String.format("Page says '%s'; expected '%s'", actualHeaderText, expectedHeaderText), actualHeaderText, expectedHeaderText);
-
-        // test complete
-        System.out.println("\tsearchForInstallationGuide: Success!");
+        assertEquals(String.format("Page says '%s'; expected '%s'", actualHeaderText, searchKeyword), actualHeaderText, searchKeyword);
     }
 
     /**
