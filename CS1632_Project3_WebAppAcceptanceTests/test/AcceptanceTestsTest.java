@@ -81,8 +81,8 @@ public class AcceptanceTestsTest {
     @Test
     public void searchForBeginnersGuide() {
         // announce test and build expectations
-        System.out.println("searchForBeginnersGuide: Testing search box for the 'Beginners Guide'");
-        String searchKeyword = "Beginners guide";
+        System.out.println("searchForBeginnersGuide: Testing search box for the 'Beginners' Guide'");
+        String searchKeyword = "Beginners' guide";
         
         try {
             // use helper method
@@ -514,9 +514,21 @@ public class AcceptanceTestsTest {
 	@Test
 	public void checkHistoryRadioButtons() {
 		// announce test and build expectations
-		System.out.printf("checkHIstoryRadioButtons()"); 
-		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history"
-		}
+		System.out.printf("checkHistoryRadioButtons: make sure that the history buttons are clickable "); 
+		String page_url = "https://wiki.archlinux.org/index.php?title=MTP&action=history";
+
+		// go to the mtp page history
+	/*	driver.get(page_url);
+
+		try {
+		// get a radio button 
+		WebElement history_radio = driver.findElement(By.cssSelector("ul#pagehistory li.before input#mw-diff-419559"));
+		//history_radio.click();
+		boolean selected = history_radio.isSelected();
+		assertTrue(selected);
+		} catch (WebDriverException wdEx) {
+			fail(String.format("Element is not clickable\n"));
+		}*/
 	}
 
 	/**
